@@ -6,10 +6,66 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Call {
+  id        String    @id @default(cuid())
+  name      String
+  createdAt DateTime  @default(now())
+  tags      CallTag[]
+  tasks     Task[]
+}
+
+model Tag {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  callTags  CallTag[]
+  suggestions SuggestedTaskTag[]
+}
+
+model CallTag {
+  callId String
+  tagId  String
+  call   Call @relation(fields: [callId], references: [id])
+  tag    Tag  @relation(fields: [tagId], references: [id])
+
+  @@id([callId, tagId])
+}
+
+model Task {
+  id               String   @id @default(cuid())
+  name             String
+  status           TaskStatus @default(OPEN)
+  callId           String
+  suggestedTaskId  String?
+  
+  call             Call     @relation(fields: [callId], references: [id])
+  suggestedTask    SuggestedTask? @relation(fields: [suggestedTaskId], references: [id])
+}
+
+model SuggestedTask {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  tags      SuggestedTaskTag[]
+  tasks     Task[]
+}
+
+model SuggestedTaskTag {
+  suggestedTaskId String
+  tagId           String
+  suggestedTask   SuggestedTask @relation(fields: [suggestedTaskId], references: [id])
+  tag             Tag           @relation(fields: [tagId], references: [id])
+
+  @@id([suggestedTaskId, tagId])
+}
+
+enum TaskStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
 }
