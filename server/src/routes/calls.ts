@@ -35,6 +35,32 @@ router.get('', async (req, res) => {
   }
 });
 
+router.get('/:callId', async (req, res) => {
+  try {
+    const { callId } = req.params;
+
+    const call = await prisma.call.findUnique({
+      where: { id: callId },
+      include: {
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
+      },
+    });
+    if (!call) {
+      res.status(404).send({ error: 'Call not found' });
+      return;
+    }
+
+    res.send(call);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: 'Failed to get call' });
+  }
+});
+
 router.post('/:callId/tag', validate(tagCallSchema), async (req, res) => {
   try {
     const { tagId } = req.body;

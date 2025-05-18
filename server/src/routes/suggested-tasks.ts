@@ -3,8 +3,24 @@ import { validate } from '../middleware/validate';
 import { createSuggestedTaskSchema } from '../validation/createSuggestedTaskSchema';
 import prisma from '../prisma/client';
 import { tagSuggestedTaskSchema } from '../validation/tagSuggestedTaskSchema';
+import { getSuggestedTasks } from '../services/suggested-task';
 
 const router = Router();
+
+router.get('', async (req, res) => {
+  try {
+    const { callId } = req.query;
+
+    const suggestedTasks = await getSuggestedTasks(
+      (callId as string) || undefined
+    );
+
+    res.send(suggestedTasks);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: 'Failed to get suggested task' });
+  }
+});
 
 router.post('', validate(createSuggestedTaskSchema), async (req, res) => {
   try {
