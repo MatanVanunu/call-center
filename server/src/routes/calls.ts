@@ -49,6 +49,15 @@ router.post('/:callId/tag', validate(tagCallSchema), async (req, res) => {
       return;
     }
 
+    const tag = await prisma.tag.findUnique({
+      where: { id: tagId },
+    });
+
+    if (!tag) {
+      res.status(404).send({ error: 'Tag not found' });
+      return;
+    }
+
     const existing = await prisma.callTag.findUnique({
       where: { callId_tagId: { callId, tagId } },
     });
