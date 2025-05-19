@@ -7,11 +7,12 @@ import { useUpdateTag } from '../hooks/useUpdateTag';
 
 const Body = styled.li`
   all: unset;
-  padding: 1rem;
-  background-color: aliceblue;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--purple-secondary);
 `;
 
 const Operations = styled.div`

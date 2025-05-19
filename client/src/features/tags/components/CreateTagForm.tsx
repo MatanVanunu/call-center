@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Button from '../../../ui/Button';
 import { useState } from 'react';
 import { useCreateTag } from '../hooks/useCreateTag';
+import FormRow from '../../../ui/FormRow';
 
 const Container = styled.form`
   display: flex;
@@ -9,15 +10,8 @@ const Container = styled.form`
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border: 1px solid #505050;
+  border: var(--border);
   border-radius: 0.5rem;
-`;
-
-const FormRow = styled.div`
-  display: flex;
-  gap: 1rem;
-  flex-grow: 1;
-  align-items: center;
 `;
 
 const Span = styled.span`

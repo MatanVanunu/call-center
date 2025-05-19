@@ -3,6 +3,8 @@ import Home from './pages/Home';
 import Layout from './ui/Layout';
 import Admin from './pages/Admin';
 import Calls from './pages/Calls';
+import Call from './pages/Call';
+import NoCallPlaceHolder from './ui/NoCallPlaceHolder';
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +23,16 @@ export const router = createBrowserRouter([
       {
         path: '/calls',
         element: <Calls />,
+        children: [
+          {
+            index: true,
+            element: <NoCallPlaceHolder />,
+          },
+          {
+            path: ':callId',
+            element: <Call />,
+          },
+        ],
       },
     ],
   },
