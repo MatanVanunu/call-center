@@ -1,17 +1,26 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import Navbar from './Navbar';
 
 const StyledLayout = styled.main`
   width: 100vw;
   height: 100vh;
-  padding: 1rem;
   box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto 1fr;
+`;
+
+const Body = styled.div`
+  height: 100%;
 `;
 
 const Layout = () => {
   return (
     <StyledLayout>
-      <Outlet />
+      <Navbar />
+      <Body>
+        <Outlet />
+      </Body>
     </StyledLayout>
   );
 };

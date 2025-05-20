@@ -8,6 +8,7 @@ const Layout = styled.main`
   padding: 1rem;
   height: 100%;
   box-sizing: border-box;
+  gap: 1rem;
 `;
 
 const Calls = () => {

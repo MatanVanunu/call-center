@@ -49,12 +49,21 @@ router.get('/:callId', async (req, res) => {
         },
       },
     });
+
     if (!call) {
       res.status(404).send({ error: 'Call not found' });
       return;
     }
 
-    res.send(call);
+    const transformed = {
+      ...call,
+      tags: call.tags.map((t) => ({
+        id: t.tag.id,
+        name: t.tag.name,
+      })),
+    };
+
+    res.send(transformed);
   } catch (error) {
     console.log(error);
     res.status(500).send({ error: 'Failed to get call' });

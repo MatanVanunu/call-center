@@ -1,36 +1,49 @@
-import styled from 'styled-components';
-import type { Call } from '../types/calls';
-import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import type { CallSummary } from '../types/calls';
+import { Link, useParams } from 'react-router-dom';
 
 const Item = styled.li`
   list-style: none;
 `;
 
-const StyledLink = styled(Link)`
+interface LinkProps {
+  $selected: boolean;
+}
+
+const StyledLink = styled(Link)<LinkProps>`
   display: block;
   padding: 0.5rem;
   border: var(--border);
   border-radius: 0.5rem;
   text-decoration: none;
   color: inherit;
+  transition: var(--transition);
 
   &:hover {
-    background-color: #f2f2f2;
+    background-color: var(--gray-primary);
   }
 
   &:focus-visible {
     outline: 2px solid blue;
   }
+
+  ${({ $selected }) =>
+    $selected &&
+    css`
+      background-color: var(--gray-primary);
+    `}
 `;
 
 interface InputProps {
-  call: Call;
+  call: CallSummary;
 }
 
 const CallListItem = ({ call }: InputProps) => {
+  const { callId } = useParams();
+  const isSelected = callId === call.id;
   return (
     <Item>
-      <StyledLink to={`/calls/${call.id}`}>
+      <StyledLink $selected={isSelected} to={`/calls/${call.id}`}>
         <span>{call.name}</span>
       </StyledLink>
     </Item>

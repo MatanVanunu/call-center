@@ -7,7 +7,7 @@ const GlobalStyles = createGlobalStyle`
     --purple-primary:  #7e57c2;
     --purple-secondary: #e1bee7;
     --purple-lighter: #f3e5f5;
-    --gray-primary: #b3b3b3;
+    --gray-primary: #e6e6e6;
     --red-primary: #A91101;
     --red-secondary: #FF003F;
 
