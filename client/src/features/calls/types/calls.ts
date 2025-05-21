@@ -13,3 +13,8 @@ export interface Call extends CallSummary {
 export interface CreateCallInput {
   name: string;
 }
+
+export interface TagCallInput {
+  callId: string;
+  tagId: string;
+}

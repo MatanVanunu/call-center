@@ -1,5 +1,10 @@
 import api from '../../../api/axios';
-import type { Call, CallSummary, CreateCallInput } from '../types/calls';
+import type {
+  Call,
+  CallSummary,
+  CreateCallInput,
+  TagCallInput,
+} from '../types/calls';
 
 export const getCallsApi = async (): Promise<CallSummary[]> => {
   const res = await api.get('/calls');
@@ -21,4 +26,11 @@ export const getCallApi = async (callId: string): Promise<Call> => {
 export const unTagCallApi = async (callId: string, tagId: string) => {
   const res = await api.delete(`/calls/${callId}/tag/${tagId}`);
   return res.data;
+};
+
+export const tagCallApi = async ({
+  callId,
+  tagId,
+}: TagCallInput): Promise<void> => {
+  await api.post(`/calls/${callId}/tag`, { tagId });
 };

@@ -5,7 +5,6 @@ import { Outlet } from 'react-router-dom';
 const Layout = styled.main`
   display: grid;
   grid-template-columns: 1fr 3fr;
-  padding: 1rem;
   height: 100%;
   box-sizing: border-box;
   gap: 1rem;

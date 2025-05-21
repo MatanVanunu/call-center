@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import Button from '../../../ui/Button';
-import CustomModal from '../../../ui/CustomModal';
-import Input from '../../../ui/Input';
 import { useState } from 'react';
-import { useCreateCall } from '../hooks/useCreateCall';
+import { useCreateTask } from '../hooks/useCreateTask';
+import CustomModal from '../../../ui/CustomModal';
+import { useParams } from 'react-router-dom';
+import Input from '../../../ui/Input';
 
 const StyledForm = styled.form`
   display: flex;
@@ -26,10 +27,11 @@ const Row = styled.div`
   align-items: center;
 `;
 
-const CreateCall = () => {
+const CreateTask = () => {
+  const { callId } = useParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>('');
-  const { createCall } = useCreateCall();
+  const { createTask } = useCreateTask();
 
   const clear = () => {
     setName('');
@@ -38,16 +40,18 @@ const CreateCall = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    createCall({ name });
-    clear();
+    if (callId) {
+      createTask({ callId, dto: { name } });
+      clear();
+    }
   };
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>New</Button>
+      <Button onClick={() => setIsOpen(true)}>New Task</Button>
       <CustomModal open={isOpen} onClose={() => setIsOpen(false)}>
         <StyledForm onSubmit={handleSubmit}>
-          <Title>Create a New Call</Title>
+          <Title>Create a New Task</Title>
           <Row style={{ width: '100%' }}>
             <Span>Name</Span>
             <Input
@@ -63,4 +67,4 @@ const CreateCall = () => {
   );
 };
 
-export default CreateCall;
+export default CreateTask;

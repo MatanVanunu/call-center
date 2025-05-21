@@ -12,6 +12,8 @@ const StyledLayout = styled.main`
 
 const Body = styled.div`
   height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
 `;
 
 const Layout = () => {

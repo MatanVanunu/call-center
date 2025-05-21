@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import CallTagListItem from './CallTagListItem';
-import { MdAdd } from 'react-icons/md';
 import { useCall } from '../hooks/useCall';
+import TagResource from '../../tags/components/TagResource';
+import { useTagCall } from '../hooks/useTagCall';
 
 const Container = styled.div`
   display: flex;
@@ -16,8 +17,13 @@ const Container = styled.div`
 
 const CallTagList = () => {
   const { call } = useCall();
+  const { tagCall } = useTagCall();
 
   if (!call) return null;
+
+  const handleTag = (tagId: string) => {
+    tagCall({ callId: call.id, tagId });
+  };
 
   return (
     <Container>
@@ -25,7 +31,7 @@ const CallTagList = () => {
       {call.tags?.map((tag) => (
         <CallTagListItem key={tag.id} tag={tag} callId={call.id} />
       ))}
-      <MdAdd size={24} />
+      <TagResource applyTag={handleTag} currentTagsIds={call.tags} />
     </Container>
   );
 };

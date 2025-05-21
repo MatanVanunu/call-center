@@ -13,9 +13,11 @@ const List = styled.ul`
 const TaskList = () => {
   const { tasks } = useTasks();
 
+  if (!tasks) return null;
+
   return (
     <List>
-      {tasks?.map((task) => (
+      {tasks.map((task) => (
         <TaskListItem key={task.id} task={task} />
       ))}
     </List>

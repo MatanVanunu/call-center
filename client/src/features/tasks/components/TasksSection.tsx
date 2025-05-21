@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import TaskList from './TaskList';
+import CreateTask from './CreateTask';
 
 const Container = styled.div`
   padding: 1rem;
@@ -28,7 +29,7 @@ const TasksSection = () => {
     <Container>
       <Header>
         <Title>Tasks</Title>
-        <button>New</button>
+        <CreateTask />
       </Header>
       <Lists>
         <TaskList />
