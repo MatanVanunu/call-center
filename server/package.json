@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch src --ext ts --ignore src/**/*.spec.ts --exec ts-node src/index.ts"
+    "dev": "nodemon --watch src --ext ts --ignore src/**/*.spec.ts --exec ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "build": "prisma generate && prisma migrate deploy && tsc"
   },
   "keywords": [],
   "author": "",
