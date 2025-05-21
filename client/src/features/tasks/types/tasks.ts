@@ -22,6 +22,11 @@ export interface UpdateTaskInput {
   };
 }
 
+export interface CreateTaskFromSuggestionInput {
+  callId: string;
+  suggestedTaskId: string;
+}
+
 export const TaskStatus = {
   OPEN: 'OPEN',
   IN_PROGRESS: 'IN_PROGRESS',

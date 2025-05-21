@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import TaskList from './TaskList';
-import CreateTask from './CreateTask';
+import TaskSuggestions from './TaskSuggestions';
 
 const Container = styled.div`
   padding: 1rem;
@@ -10,30 +10,18 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Title = styled.span`
-  font-size: 1.5rem;
-`;
-
 const Lists = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 `;
 
 const TasksSection = () => {
   return (
     <Container>
-      <Header>
-        <Title>Tasks</Title>
-        <CreateTask />
-      </Header>
       <Lists>
         <TaskList />
-        {/* <TaskList /> */}
+        <TaskSuggestions />
       </Lists>
     </Container>
   );

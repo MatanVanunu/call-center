@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useTasks } from '../hooks/useTasks';
 import TaskListItem from './TaskListItem';
+import CreateTask from './CreateTask';
 
 const List = styled.ul`
   all: unset;
@@ -10,6 +11,15 @@ const List = styled.ul`
   overflow: auto;
 `;
 
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Title = styled.span`
+  font-size: 1.5rem;
+`;
+
 const TaskList = () => {
   const { tasks } = useTasks();
 
@@ -17,6 +27,11 @@ const TaskList = () => {
 
   return (
     <List>
+      <Header>
+        <Title>Tasks</Title>
+        <CreateTask />
+      </Header>
+
       {tasks.map((task) => (
         <TaskListItem key={task.id} task={task} />
       ))}
