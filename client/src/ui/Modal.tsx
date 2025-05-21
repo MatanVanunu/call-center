@@ -34,9 +34,10 @@ const Header = styled.h2`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
   margin: 0;
-  border-bottom: var(--border);
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 1rem;
 `;
 
 const Body = styled.div`

@@ -32,7 +32,7 @@ model CallTag {
   callId String
   tagId  String
   call   Call @relation(fields: [callId], references: [id])
-  tag    Tag  @relation(fields: [tagId], references: [id])
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
   @@id([callId, tagId])
 }
@@ -58,8 +58,8 @@ model SuggestedTask {
 model SuggestedTaskTag {
   suggestedTaskId String
   tagId           String
-  suggestedTask   SuggestedTask @relation(fields: [suggestedTaskId], references: [id])
-  tag             Tag           @relation(fields: [tagId], references: [id])
+  suggestedTask   SuggestedTask @relation(fields: [suggestedTaskId], references: [id], onDelete: Cascade)
+  tag             Tag           @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
   @@id([suggestedTaskId, tagId])
 }

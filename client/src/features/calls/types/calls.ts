@@ -18,3 +18,5 @@ export interface TagCallInput {
   callId: string;
   tagId: string;
 }
+
+export type UnTagCallInput = TagCallInput;

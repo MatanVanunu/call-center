@@ -1,13 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { unTagCallApi } from '../api/calls';
+import type { AxiosError } from 'axios';
+import type { UnTagCallInput } from '../types/calls';
 
-export const useUnTagCall = (callId: string, tagId: string) => {
+export const useUnTagCall = () => {
   const queryClient = useQueryClient();
 
-  const { mutate: unTagCall } = useMutation({
-    mutationFn: () => unTagCallApi(callId, tagId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['call', callId] });
+  const { mutate: unTagCall } = useMutation<void, AxiosError, UnTagCallInput>({
+    mutationFn: unTagCallApi,
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['call', variables.callId] });
     },
     onError: (error) => {
       console.log(error);

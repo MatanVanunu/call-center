@@ -1,5 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Home from './pages/Home';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Layout from './ui/Layout';
 import Admin from './pages/Admin';
 import Calls from './pages/Calls';
@@ -13,7 +12,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Navigate replace to={'/admin'} />,
       },
 
       {

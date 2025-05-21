@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { RxCross2 } from 'react-icons/rx';
 import type { Tag } from '../../tags/types/tags';
-import { useUnTagCall } from '../hooks/useUnTagCall';
 
 const Body = styled.span`
   background-color: var(--purple-secondary);
@@ -18,18 +17,16 @@ const Body = styled.span`
 
 interface InputProps {
   tag: Tag;
-  callId: string;
+  onRemove: (tagId: string) => void;
 }
 
-const CallTagListItem = ({ tag, callId }: InputProps) => {
-  const { unTagCall } = useUnTagCall(callId, tag.id);
-
+const RemoveableTag = ({ tag, onRemove }: InputProps) => {
   return (
     <Body>
       {tag.name}
-      <RxCross2 size={24} onClick={() => unTagCall()} />
+      <RxCross2 size={24} onClick={() => onRemove(tag.id)} />
     </Body>
   );
 };
 
-export default CallTagListItem;
+export default RemoveableTag;

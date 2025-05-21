@@ -1,19 +1,15 @@
 import styled from 'styled-components';
 import Button from '../../../ui/Button';
-import CustomModal from '../../../ui/CustomModal';
 import Input from '../../../ui/Input';
 import { useState } from 'react';
 import { useCreateCall } from '../hooks/useCreateCall';
+import Modal from '../../../ui/Modal';
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: start;
-`;
-
-const Title = styled.span`
-  font-size: 2rem;
 `;
 
 const Span = styled.span`
@@ -45,9 +41,9 @@ const CreateCall = () => {
   return (
     <>
       <Button onClick={() => setIsOpen(true)}>New</Button>
-      <CustomModal open={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal visible={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Header>New Call</Modal.Header>
         <StyledForm onSubmit={handleSubmit}>
-          <Title>Create a New Call</Title>
           <Row style={{ width: '100%' }}>
             <Span>Name</Span>
             <Input
@@ -58,7 +54,7 @@ const CreateCall = () => {
           </Row>
           <Button>Create</Button>
         </StyledForm>
-      </CustomModal>
+      </Modal>
     </>
   );
 };

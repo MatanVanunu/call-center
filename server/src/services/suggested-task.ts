@@ -25,13 +25,17 @@ export const getSuggestedTasks = async (callId?: string) => {
   const tasks = await prisma.suggestedTask.findMany({
     where,
     include: {
-      tags: true,
+      tags: {
+        include: {
+          tag: true,
+        },
+      },
     },
   });
 
   return tasks.map((task) => ({
     id: task.id,
     name: task.name,
-    tags: task.tags.map((t) => t.tagId),
+    tags: task.tags.map((t) => t.tag),
   }));
 };

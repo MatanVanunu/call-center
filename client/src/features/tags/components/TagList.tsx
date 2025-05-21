@@ -1,23 +1,16 @@
-import styled from 'styled-components';
+import ListContainer from '../../../ui/ListContainer';
 import { useTags } from '../hooks/useTags';
 import TagListItem from './TagListItem';
-
-const Container = styled.ul`
-  all: unset;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
 
 const TagList = () => {
   const { tags } = useTags();
 
   return (
-    <Container>
+    <ListContainer>
       {tags?.map((tag) => (
         <TagListItem key={tag.id} tag={tag} />
       ))}
-    </Container>
+    </ListContainer>
   );
 };
 

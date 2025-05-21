@@ -15,6 +15,7 @@ const Container = styled.div`
 const Header = styled.span`
   font-size: 1.5rem;
   font-style: italic;
+  text-transform: capitalize;
 `;
 
 const Call = () => {

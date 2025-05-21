@@ -2,19 +2,15 @@ import styled from 'styled-components';
 import Button from '../../../ui/Button';
 import { useState } from 'react';
 import { useCreateTask } from '../hooks/useCreateTask';
-import CustomModal from '../../../ui/CustomModal';
 import { useParams } from 'react-router-dom';
 import Input from '../../../ui/Input';
+import Modal from '../../../ui/Modal';
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: start;
-`;
-
-const Title = styled.span`
-  font-size: 2rem;
 `;
 
 const Span = styled.span`
@@ -49,9 +45,9 @@ const CreateTask = () => {
   return (
     <>
       <Button onClick={() => setIsOpen(true)}>New Task</Button>
-      <CustomModal open={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal visible={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Header>Create a New Task</Modal.Header>
         <StyledForm onSubmit={handleSubmit}>
-          <Title>Create a New Task</Title>
           <Row style={{ width: '100%' }}>
             <Span>Name</Span>
             <Input
@@ -62,7 +58,7 @@ const CreateTask = () => {
           </Row>
           <Button>Create</Button>
         </StyledForm>
-      </CustomModal>
+      </Modal>
     </>
   );
 };

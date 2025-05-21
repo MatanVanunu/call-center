@@ -58,4 +58,28 @@ router.patch('/:tagId', validate(createTagSchema), async (req, res) => {
   }
 });
 
+router.delete('/:tagId', async (req, res) => {
+  try {
+    const { tagId } = req.params;
+
+    const tag = await prisma.tag.findUnique({
+      where: { id: tagId },
+    });
+
+    if (!tag) {
+      res.status(404).send();
+      return;
+    }
+
+    await prisma.tag.delete({
+      where: { id: tagId },
+    });
+
+    res.status(204).send();
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ errors: 'Failed to update tag' });
+  }
+});
+
 export default router;

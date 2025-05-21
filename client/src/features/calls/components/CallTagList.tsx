@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import CallTagListItem from './CallTagListItem';
 import { useCall } from '../hooks/useCall';
 import TagResource from '../../tags/components/TagResource';
 import { useTagCall } from '../hooks/useTagCall';
+import { useUnTagCall } from '../hooks/useUnTagCall';
+import RemoveableTag from '../../tags/components/RemoveableTag';
 
 const Container = styled.div`
   display: flex;
@@ -18,6 +19,7 @@ const Container = styled.div`
 const CallTagList = () => {
   const { call } = useCall();
   const { tagCall } = useTagCall();
+  const { unTagCall } = useUnTagCall();
 
   if (!call) return null;
 
@@ -25,11 +27,15 @@ const CallTagList = () => {
     tagCall({ callId: call.id, tagId });
   };
 
+  const handleRemoveTag = (tagId: string) => {
+    unTagCall({ callId: call.id, tagId });
+  };
+
   return (
     <Container>
       <span>Tags</span>
       {call.tags?.map((tag) => (
-        <CallTagListItem key={tag.id} tag={tag} callId={call.id} />
+        <RemoveableTag key={tag.id} tag={tag} onRemove={handleRemoveTag} />
       ))}
       <TagResource applyTag={handleTag} currentTagsIds={call.tags} />
     </Container>

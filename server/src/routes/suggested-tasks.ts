@@ -64,6 +64,30 @@ router.patch('/:id', validate(createSuggestedTaskSchema), async (req, res) => {
   }
 });
 
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const suggestedTask = await prisma.suggestedTask.findUnique({
+      where: { id },
+    });
+
+    if (!suggestedTask) {
+      res.status(404).send({ error: 'Suggested task not found' });
+      return;
+    }
+
+    await prisma.suggestedTask.delete({
+      where: { id },
+    });
+
+    res.status(204).send();
+  } catch (error) {
+    console.log(error);
+    res.status(500).send();
+  }
+});
+
 router.post('/:id/tag', validate(tagSuggestedTaskSchema), async (req, res) => {
   try {
     const { id } = req.params;
@@ -106,6 +130,32 @@ router.post('/:id/tag', validate(tagSuggestedTaskSchema), async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send({ error: 'Failed to tag suggested task' });
+  }
+});
+
+router.delete('/:id/tag/:tagId', async (req, res) => {
+  try {
+    const { id, tagId } = req.params;
+
+    const relation = await prisma.suggestedTaskTag.findUnique({
+      where: { suggestedTaskId_tagId: { suggestedTaskId: id, tagId } },
+    });
+
+    if (!relation) {
+      res
+        .status(404)
+        .send({ error: 'Suggested task not tagged with given tag' });
+      return;
+    }
+
+    await prisma.suggestedTaskTag.delete({
+      where: { suggestedTaskId_tagId: { suggestedTaskId: id, tagId } },
+    });
+
+    res.status(204).send();
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: 'Failed to untag suggested task' });
   }
 });
 
