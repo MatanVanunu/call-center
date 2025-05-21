@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useCall } from '../features/calls/hooks/useCall';
 import CallTagList from '../features/calls/components/CallTagList';
 import TasksSection from '../features/tasks/components/TasksSection';
+import { Navigate } from 'react-router-dom';
 
 const Container = styled.div`
   padding: 0.5rem;
@@ -10,6 +11,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
 `;
 
 const Header = styled.span`
@@ -19,13 +23,13 @@ const Header = styled.span`
 `;
 
 const Call = () => {
-  const { call } = useCall();
+  const { call, isLoadingCall } = useCall();
 
-  if (!call) return null;
+  if (!call && !isLoadingCall) return <Navigate replace to={'/calls'} />;
 
   return (
     <Container>
-      <Header>{call.name}</Header>
+      <Header>{call?.name}</Header>
       <CallTagList />
       <TasksSection />
     </Container>

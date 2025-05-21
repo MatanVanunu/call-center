@@ -7,6 +7,8 @@ const List = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  height: 100%;
+  overflow: auto;
 `;
 
 const CallList = () => {

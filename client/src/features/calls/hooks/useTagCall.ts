@@ -10,6 +10,9 @@ export const useTagCall = () => {
     mutationFn: tagCallApi,
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['call', variables.callId] });
+      queryClient.invalidateQueries({
+        queryKey: ['suggested-tasks', variables.callId],
+      });
     },
     onError: (error) => {
       console.log(error);

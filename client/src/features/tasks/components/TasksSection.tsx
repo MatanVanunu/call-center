@@ -13,7 +13,8 @@ const Container = styled.div`
 const Lists = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  height: 100%;
+  overflow: hidden;
 `;
 
 const TasksSection = () => {

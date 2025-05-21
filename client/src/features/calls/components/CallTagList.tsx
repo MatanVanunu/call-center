@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { useCall } from '../hooks/useCall';
 import TagResource from '../../tags/components/TagResource';
+import RemoveableTag from '../../tags/components/RemoveableTag';
+import { useCall } from '../hooks/useCall';
 import { useTagCall } from '../hooks/useTagCall';
 import { useUnTagCall } from '../hooks/useUnTagCall';
-import RemoveableTag from '../../tags/components/RemoveableTag';
 
 const Container = styled.div`
   display: flex;

@@ -10,11 +10,18 @@ const Layout = styled.main`
   gap: 1rem;
 `;
 
+const Window = styled.div`
+  height: 100%;
+  overflow: hidden;
+`;
+
 const Calls = () => {
   return (
     <Layout>
       <CallsSibebar />
-      <Outlet />
+      <Window>
+        <Outlet />
+      </Window>
     </Layout>
   );
 };

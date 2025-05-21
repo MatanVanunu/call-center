@@ -3,10 +3,14 @@ import CallList from './CallList';
 import CallListHeader from './CallListHeader';
 
 const Body = styled.aside`
-  all: unset;
+  display: flex;
+  flex-direction: column;
   border-radius: 0.5rem;
   border: var(--border);
   padding: 0.5rem;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 `;
 
 const CallsSibebar = () => {
