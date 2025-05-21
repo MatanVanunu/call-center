@@ -5,7 +5,6 @@ import {
   isValidElement,
   useState,
   type ReactElement,
-  type ReactNode,
 } from 'react';
 import { useTags } from '../hooks/useTags';
 import type { Tag } from '../types/tags';
@@ -36,7 +35,7 @@ const TagResource = ({ currentTagsIds, applyTag, trigger }: InputProps) => {
   const options = tags?.filter((tag) => !currentIdsSet.has(tag.id));
 
   const triggerWithOnClick = isValidElement(trigger) ? (
-    cloneElement(trigger as ReactElement<unknown>, {
+    cloneElement(trigger as ReactElement<{ onClick?: () => void }>, {
       onClick: () => setIsOpen(true),
     })
   ) : (
